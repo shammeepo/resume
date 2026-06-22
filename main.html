@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CV · Telecommunication Engineering</title>
+  <title>PokéCV · Shamsiuuu</title>
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
@@ -14,92 +14,211 @@
     }
 
     body {
-      background: #f7f3eb;  /* cream background */
-      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+      background: #f2efe8;
+      font-family: 'Segoe UI', 'Courier New', monospace, system-ui;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       padding: 2rem 1rem;
-      line-height: 1.5;
-      color: #1e2b2f;
+      color: #1a2e30;
+      position: relative;
+      overflow-x: hidden;
     }
 
-    /* main card – cream & teal theme */
+    /* floating pokéball animation (background) */
+    .pokedots {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .pokedot {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #b8d4c0, #1a5c5e);
+      opacity: 0.07;
+      width: 50px;
+      height: 50px;
+      animation: floatDot 20s infinite alternate ease-in-out;
+    }
+
+    .pokedot:nth-child(1) { top: 5%; left: 3%; width: 80px; height: 80px; animation-duration: 18s; }
+    .pokedot:nth-child(2) { top: 15%; right: 8%; width: 120px; height: 120px; animation-duration: 24s; }
+    .pokedot:nth-child(3) { bottom: 20%; left: 2%; width: 100px; height: 100px; animation-duration: 22s; }
+    .pokedot:nth-child(4) { bottom: 10%; right: 5%; width: 140px; height: 140px; animation-duration: 28s; }
+    .pokedot:nth-child(5) { top: 45%; left: 50%; width: 90px; height: 90px; animation-duration: 16s; }
+
+    @keyframes floatDot {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      33% { transform: translate(20px, -30px) scale(1.2) rotate(10deg); }
+      66% { transform: translate(-15px, 20px) scale(0.9) rotate(-5deg); }
+      100% { transform: translate(10px, -10px) scale(1.1) rotate(5deg); }
+    }
+
+    /* main card – poké-style */
     .resume-card {
       max-width: 1100px;
       width: 100%;
-      background: #fefcf7;  /* soft cream */
-      border-radius: 2.5rem;
-      box-shadow: 0 20px 40px -12px rgba(0, 40, 40, 0.25);
+      background: #fcf9f4;
+      border-radius: 3rem 3rem 2rem 2rem;
+      box-shadow: 0 20px 40px -10px rgba(20, 60, 50, 0.3), 0 0 0 2px #1e4b4f, 0 0 0 6px #d7cbbc;
       overflow: hidden;
-      transition: all 0.2s ease;
-      border: 1px solid rgba(30, 60, 70, 0.08);
-      animation: fadeSlide 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+      position: relative;
+      z-index: 2;
+      animation: pokemonEnter 0.9s cubic-bezier(0.2, 0.8, 0.3, 1.2) forwards;
+      border: 2px solid #b8b0a0;
     }
 
-    @keyframes fadeSlide {
-      0% { opacity: 0; transform: translateY(30px); }
-      100% { opacity: 1; transform: translateY(0); }
+    @keyframes pokemonEnter {
+      0% { opacity: 0; transform: scale(0.9) rotate(-1deg) translateY(30px); }
+      60% { transform: scale(1.02) rotate(0.5deg) translateY(-5px); }
+      100% { opacity: 1; transform: scale(1) rotate(0deg) translateY(0); }
     }
 
-    /* header – teal gradient with cream text */
+    /* header – teal with pokéball icon */
     .header {
-      background: linear-gradient(145deg, #1e4b4f, #1a4044);
-      padding: 2.2rem 2.8rem;
+      background: linear-gradient(145deg, #1a4b4f, #0e3a3d);
+      padding: 1.8rem 2.5rem;
       color: #f4efe8;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 4px solid #c7b7a2;
+      border-bottom: 6px solid #c7b7a2;
+      position: relative;
+      gap: 1rem;
+    }
+
+    .header::after {
+      content: "⚡";
+      position: absolute;
+      right: 20px;
+      bottom: -10px;
+      font-size: 2.2rem;
+      opacity: 0.2;
+      transform: rotate(10deg);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    /* Profile Picture Styles */
+    .profile-pic-wrapper {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 4px solid #f5d742;
+      box-shadow: 0 0 0 3px #1a4b4f, 0 8px 20px rgba(0,0,0,0.3);
+      overflow: hidden;
+      animation: wobble 3s infinite ease-in-out;
+      flex-shrink: 0;
+      background: #1a4b4f;
+    }
+
+    .profile-pic-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .profile-pic-wrapper .placeholder-pic {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1a4b4f, #0e3a3d);
+      color: #f5d742;
+      font-size: 2.8rem;
+      font-weight: 700;
+    }
+
+    @keyframes wobble {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      25% { transform: rotate(-6deg) scale(1.03); }
+      75% { transform: rotate(6deg) scale(1.02); }
+    }
+
+    .header-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
     }
 
     .header-left h1 {
-      font-size: 2.6rem;
-      font-weight: 600;
-      letter-spacing: -0.5px;
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 2px;
       color: #f4efe8;
-      margin-bottom: 0.25rem;
+      text-shadow: 2px 2px 0 #0e2a2c;
     }
 
-    .header-left .subhead {
-      font-size: 1rem;
+    .header-left h1 span {
       font-weight: 300;
-      color: #d6d9d0;
-      background: rgba(255, 255, 245, 0.08);
-      display: inline-block;
-      padding: 0.3rem 1.2rem;
-      border-radius: 30px;
+      background: rgba(255, 215, 0, 0.2);
+      padding: 0 10px;
+      border-radius: 40px;
+      font-size: 1.6rem;
+      border: 1px solid #e6c78c;
+    }
+
+    .subhead {
+      font-size: 0.85rem;
+      background: rgba(255, 215, 0, 0.15);
+      padding: 0.2rem 1.4rem;
+      border-radius: 40px;
+      border: 1px solid #d4b87a;
+      font-weight: 300;
+      letter-spacing: 1px;
       backdrop-filter: blur(2px);
-      border: 1px solid rgba(220, 215, 200, 0.2);
+      display: inline-block;
+      width: fit-content;
     }
 
     .header-right {
       display: flex;
-      gap: 1rem;
+      gap: 0.8rem;
       flex-wrap: wrap;
-      margin-top: 0.5rem;
     }
 
-    .header-right .badge {
+    .badge {
       background: rgba(245, 240, 230, 0.12);
       backdrop-filter: blur(4px);
-      padding: 0.5rem 1.2rem;
+      padding: 0.4rem 1.2rem;
       border-radius: 40px;
-      font-size: 0.85rem;
-      font-weight: 400;
-      border: 1px solid rgba(215, 210, 195, 0.25);
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: 1px solid #b8b0a0;
       color: #eae6db;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
       transition: all 0.2s;
     }
 
     .badge i {
-      color: #cfd6c0;
-      font-size: 1rem;
+      color: #f5d742;
+    }
+
+    .badge:hover {
+      background: #f5d742;
+      color: #1a3d3f;
+      transform: scale(1.05);
+      border-color: #f5d742;
     }
 
     /* main grid */
@@ -107,14 +226,14 @@
       display: grid;
       grid-template-columns: 1fr 2.2fr;
       gap: 0;
-      background: #fefcf7;
+      background: #fcf9f4;
     }
 
-    /* sidebar – cream + teal accents */
+    /* sidebar – cream with poké-border */
     .sidebar {
-      background: #faf7f1;
+      background: #f5f0e8;
       padding: 2rem 1.8rem;
-      border-right: 1px solid #e2dbd0;
+      border-right: 3px double #b8b0a0;
     }
 
     .sidebar-section {
@@ -122,22 +241,22 @@
     }
 
     .sidebar-section h3 {
-      font-size: 1rem;
+      font-size: 0.9rem;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
-      font-weight: 600;
-      color: #1e4b4f;
-      border-bottom: 2px solid #d7cbbc;
-      padding-bottom: 0.5rem;
-      margin-bottom: 1.2rem;
+      letter-spacing: 2px;
+      font-weight: 700;
+      color: #1a4b4f;
+      border-bottom: 3px solid #d7cbbc;
+      padding-bottom: 0.4rem;
+      margin-bottom: 1rem;
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
     .sidebar-section h3 i {
-      color: #1a5c5e;
-      font-size: 1.1rem;
+      color: #d4a742;
+      font-size: 1.2rem;
       width: 1.6rem;
     }
 
@@ -149,71 +268,73 @@
 
     .skill-tag {
       background: white;
-      padding: 0.3rem 1rem;
+      padding: 0.2rem 1rem;
       border-radius: 30px;
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: #1e3d40;
-      border: 1px solid #c7d2c4;
-      box-shadow: 0 2px 4px rgba(0, 30, 30, 0.02);
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #1a3d40;
+      border: 2px solid #b8b0a0;
+      box-shadow: 0 2px 0 #1a4b4f;
+      text-transform: uppercase;
       transition: all 0.15s;
+      letter-spacing: 0.3px;
     }
 
     .skill-tag:hover {
-      background: #1e4b4f;
-      color: #f4efe8;
-      border-color: #1e4b4f;
-      transform: scale(1.02);
+      background: #f5d742;
+      border-color: #1a4b4f;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 0 #1a4b4f;
     }
 
     .list-item {
       display: flex;
       align-items: baseline;
       gap: 0.6rem;
-      margin-bottom: 0.65rem;
-      font-size: 0.95rem;
-      color: #1e2f31;
-    }
-
-    .list-item i {
-      color: #1a5c5e;
-      width: 1.2rem;
+      margin-bottom: 0.6rem;
       font-size: 0.9rem;
     }
 
+    .list-item i {
+      color: #d4a742;
+      width: 1.2rem;
+    }
+
     .list-item strong {
-      font-weight: 600;
-      color: #11373a;
+      font-weight: 700;
+      color: #0e3a3d;
     }
 
     .ref-card {
-      background: #f3efe8;
-      padding: 0.9rem 1rem;
-      border-radius: 16px;
-      border-left: 4px solid #1a5c5e;
+      background: #fcf9f4;
+      padding: 0.8rem 1rem;
+      border-radius: 20px;
+      border: 2px solid #b8b0a0;
+      border-left: 6px solid #d4a742;
       margin-top: 0.5rem;
+      box-shadow: 0 4px 0 #1a4b4f;
     }
 
     .ref-card .name {
-      font-weight: 600;
-      color: #1a4044;
+      font-weight: 700;
+      color: #0e3a3d;
     }
 
     .ref-card .role {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: #3f5a5a;
     }
 
     .ref-card .email {
-      font-size: 0.8rem;
-      color: #1e4b4f;
+      font-size: 0.75rem;
+      color: #1a4b4f;
       word-break: break-all;
     }
 
     /* main content */
     .main-content {
       padding: 2rem 2.2rem;
-      background: #fefcf7;
+      background: #fcf9f4;
     }
 
     .content-section {
@@ -221,76 +342,86 @@
     }
 
     .content-section h3 {
-      font-size: 1rem;
+      font-size: 0.9rem;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
-      font-weight: 600;
-      color: #1e4b4f;
-      border-bottom: 2px solid #d7cbbc;
+      letter-spacing: 2px;
+      font-weight: 700;
+      color: #1a4b4f;
+      border-bottom: 3px solid #d7cbbc;
       padding-bottom: 0.4rem;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1rem;
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
     .content-section h3 i {
-      color: #1a5c5e;
-      font-size: 1.1rem;
+      color: #d4a742;
+      font-size: 1.2rem;
       width: 1.6rem;
     }
 
     .project-item, .exp-item {
       margin-bottom: 1.5rem;
+      background: #f5f0e8;
+      padding: 0.8rem 1.2rem;
+      border-radius: 20px;
+      border: 2px solid #b8b0a0;
+      box-shadow: 0 4px 0 #1a4b4f;
+      transition: all 0.2s;
+    }
+
+    .project-item:hover, .exp-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 0 #1a4b4f, 0 8px 20px rgba(20,60,50,0.1);
     }
 
     .project-item .title, .exp-item .title {
-      font-weight: 600;
-      font-size: 1.05rem;
-      color: #1a4044;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #0e3a3d;
       display: flex;
       flex-wrap: wrap;
-      align-items: baseline;
+      align-items: center;
       gap: 0.5rem;
     }
 
     .project-item .desc, .exp-item .desc {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: #1f3538;
       margin-top: 0.2rem;
-      padding-left: 0.2rem;
-      border-left: 3px solid #c7d2c4;
+      padding-left: 0.5rem;
+      border-left: 4px solid #d4a742;
       padding-left: 0.9rem;
     }
 
     .exp-item .meta {
-      font-size: 0.8rem;
-      color: #3f5a5a;
-      font-weight: 400;
-      background: #e9e3d9;
-      padding: 0.1rem 0.9rem;
-      border-radius: 20px;
+      font-size: 0.7rem;
+      background: #d7cbbc;
+      padding: 0.1rem 1rem;
+      border-radius: 30px;
       display: inline-block;
-      margin-top: 0.1rem;
+      font-weight: 600;
+      color: #1a3d3f;
     }
 
     .exp-item ul {
-      margin: 0.3rem 0 0 1.2rem;
+      margin: 0.3rem 0 0 1rem;
       list-style: none;
     }
 
     .exp-item ul li {
-      font-size: 0.92rem;
-      margin-bottom: 0.3rem;
+      font-size: 0.85rem;
+      margin-bottom: 0.2rem;
       display: flex;
       gap: 0.6rem;
       align-items: baseline;
     }
 
     .exp-item ul li::before {
-      content: "▹";
-      color: #1a5c5e;
-      font-weight: 600;
+      content: "▸";
+      color: #d4a742;
+      font-weight: 700;
     }
 
     .education-detail {
@@ -298,23 +429,24 @@
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: baseline;
-      border-bottom: 1px dashed #d7cbbc;
+      border-bottom: 2px dashed #b8b0a0;
       padding-bottom: 0.4rem;
       margin-bottom: 0.4rem;
     }
 
     .education-detail .uni {
-      font-weight: 600;
-      color: #11373a;
+      font-weight: 700;
+      color: #0e3a3d;
     }
 
     .education-detail .cgpa {
-      background: #e2dbd0;
-      padding: 0.1rem 0.9rem;
+      background: #d7cbbc;
+      padding: 0.1rem 1rem;
       border-radius: 30px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #1a4044;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #1a4b4f;
+      border: 1px solid #b8b0a0;
     }
 
     .cert-grid {
@@ -325,29 +457,58 @@
     }
 
     .cert-badge {
-      background: #f3efe8;
+      background: #fcf9f4;
       padding: 0.2rem 1.2rem;
       border-radius: 30px;
-      font-size: 0.8rem;
-      border: 1px solid #d0cbbc;
+      font-size: 0.7rem;
+      border: 2px solid #b8b0a0;
       color: #1a3d40;
+      font-weight: 600;
+      box-shadow: 0 2px 0 #1a4b4f;
+      transition: all 0.15s;
     }
 
     .cert-badge i {
       margin-right: 6px;
-      color: #1a5c5e;
+      color: #d4a742;
+    }
+
+    .cert-badge:hover {
+      background: #f5d742;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 0 #1a4b4f;
     }
 
     .lang-item {
       display: flex;
       gap: 0.6rem;
       align-items: baseline;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
 
     .lang-item i {
-      color: #1a5c5e;
+      color: #d4a742;
       width: 1.2rem;
+    }
+
+    /* poké-type animation */
+    .type-badge {
+      display: inline-block;
+      background: #f5d742;
+      color: #1a3d3f;
+      font-size: 0.6rem;
+      padding: 0.1rem 0.8rem;
+      border-radius: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      border: 1px solid #b8b0a0;
+      margin-left: 6px;
+      animation: typePulse 2s infinite alternate;
+    }
+
+    @keyframes typePulse {
+      0% { background: #f5d742; }
+      100% { background: #d4b87a; }
     }
 
     /* responsive */
@@ -357,33 +518,44 @@
       }
       .sidebar {
         border-right: 0;
-        border-bottom: 1px solid #e2dbd0;
+        border-bottom: 3px double #b8b0a0;
       }
       .header {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.8rem;
-        padding: 1.8rem;
+        padding: 1.5rem;
       }
       .header-right {
         width: 100%;
         justify-content: flex-start;
       }
+      .profile-pic-wrapper {
+        width: 65px;
+        height: 65px;
+      }
     }
 
     @media (max-width: 450px) {
       .header-left h1 {
-        font-size: 2rem;
+        font-size: 1.6rem;
       }
       .main-content, .sidebar {
-        padding: 1.5rem;
+        padding: 1.2rem;
+      }
+      .profile-pic-wrapper {
+        width: 55px;
+        height: 55px;
+      }
+      .profile-pic-wrapper .placeholder-pic {
+        font-size: 2rem;
       }
     }
 
-    /* animation on scroll / appear */
+    /* animation for items */
     .animate-item {
       opacity: 0;
-      animation: fadeUp 0.5s ease forwards;
+      animation: slideUp 0.5s ease forwards;
     }
 
     .animate-item:nth-child(1) { animation-delay: 0.05s; }
@@ -393,50 +565,87 @@
     .animate-item:nth-child(5) { animation-delay: 0.25s; }
     .animate-item:nth-child(6) { animation-delay: 0.3s; }
 
-    @keyframes fadeUp {
-      0% { opacity: 0; transform: translateY(10px); }
+    @keyframes slideUp {
+      0% { opacity: 0; transform: translateY(20px); }
       100% { opacity: 1; transform: translateY(0); }
     }
 
-    /* small teal accent */
-    .teal-dot {
-      color: #1a5c5e;
+    /* footer */
+    .footer-poke {
+      background: #1a4b4f;
+      padding: 0.8rem 2rem;
+      border-top: 4px solid #d4a742;
+      text-align: center;
+      font-size: 0.7rem;
+      color: #d7cbbc;
+      letter-spacing: 1.5px;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-poke i {
+      color: #f5d742;
     }
 
     a {
-      color: #1a5c5e;
+      color: #f5d742;
       text-decoration: none;
-      border-bottom: 1px dotted #b7c4b0;
+      border-bottom: 1px dotted #b8b0a0;
     }
 
     a:hover {
-      color: #0d3d3f;
-      border-bottom: 1px solid #1a5c5e;
+      color: #f5d742;
+      border-bottom: 2px solid #f5d742;
     }
 
-    /* additional micro-interaction */
-    .badge, .skill-tag, .cert-badge {
-      transition: all 0.2s ease;
-    }
-
-    .badge:hover {
-      background: rgba(30, 75, 79, 0.25);
-      color: #f4efe8;
+    /* Upload hint */
+    .upload-hint {
+      font-size: 0.6rem;
+      opacity: 0.7;
+      margin-top: 2px;
+      text-align: center;
+      color: #d7cbbc;
+      background: rgba(0,0,0,0.2);
+      padding: 0.1rem 0.5rem;
+      border-radius: 10px;
+      width: fit-content;
     }
   </style>
 </head>
 <body>
+  <!-- floating poké balls -->
+  <div class="pokedots">
+    <div class="pokedot"></div>
+    <div class="pokedot"></div>
+    <div class="pokedot"></div>
+    <div class="pokedot"></div>
+    <div class="pokedot"></div>
+  </div>
+
   <div class="resume-card">
-    <!-- header with teal -->
+    <!-- header with profile picture -->
     <div class="header">
       <div class="header-left">
-        <h1>Shamsiuuu<span style="font-weight:300; color:#d0d8c4;"> CV</span></h1>
-        <div class="subhead"><i class="fas fa-graduation-cap" style="margin-right:8px;"></i> Computer Engineering · UniMAP</div>
+        <!-- Profile Picture -->
+        <div class="profile-pic-wrapper">
+          <!-- REPLACE 'profile.jpg' WITH YOUR OWN IMAGE PATH -->
+          <img src="sham.png" alt="Profile Photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="placeholder-pic" style="display:none;">
+            <i class="fas fa-user"></i>
+          </div>
+        </div>
+
+        <div class="header-info">
+          <h1>Danish <span>CV</span></h1>
+          <div class="subhead"><i class="fas fa-pokeball" style="margin-right:6px;"></i> Computer Engineer · UniMAP</div>
+        </div>
       </div>
       <div class="header-right">
-        <span class="badge"><i class="fas fa-trophy"></i> Dean's Award (S2,4,6)</span>
-        <span class="badge"><i class="fas fa-medal"></i> Gold Medal 2024</span>
-        <span class="badge"><i class="fas fa-microchip"></i> IoT · Embedded</span>
+        <span class="badge"><i class="fas fa-trophy"></i> Dean's Award</span>
+        <span class="badge"><i class="fas fa-medal"></i> Gold 2024</span>
+        <span class="badge"><i class="fas fa-bolt"></i> IoT master</span>
       </div>
     </div>
 
@@ -446,7 +655,7 @@
       <div class="sidebar">
         <!-- skills -->
         <div class="sidebar-section animate-item">
-          <h3><i class="fas fa-code"></i> Technical skills</h3>
+          <h3><i class="fas fa-code"></i> Tech skills</h3>
           <div class="skill-tags">
             <span class="skill-tag">Python</span>
             <span class="skill-tag">Java</span>
@@ -471,7 +680,7 @@
         <div class="sidebar-section animate-item">
           <h3><i class="fas fa-certificate"></i> Certifications</h3>
           <div class="cert-grid">
-            <span class="cert-badge"><i class="fas fa-check-circle"></i> Cisco Networking Essentials</span>
+            <span class="cert-badge"><i class="fas fa-check-circle"></i> Cisco Networking</span>
             <span class="cert-badge"><i class="fas fa-check-circle"></i> Google Data Analytics</span>
           </div>
           <div style="margin-top: 0.8rem;">
@@ -491,7 +700,7 @@
         <div class="sidebar-section animate-item">
           <h3><i class="fas fa-address-card"></i> Reference</h3>
           <div class="ref-card">
-            <div class="name">Ts. Dr. Ahmad Faizal Bin Mohd Noor</div>
+            <div class="name"><i class="fas fa-user-graduate" style="color:#d4a742; margin-right:6px;"></i> Ts. Dr. Ahmad Faizal</div>
             <div class="role">Senior Lecturer, UniMAP</div>
             <div class="email"><i class="fas fa-envelope" style="margin-right:6px;"></i> faizal@unimap.edu.my</div>
           </div>
@@ -503,24 +712,27 @@
         <!-- summary -->
         <div class="content-section animate-item">
           <h3><i class="fas fa-user-graduate"></i> Professional summary</h3>
-          <p style="font-size:0.98rem; color:#1f3538; line-height:1.6;">A motivated Computer Engineering graduate with strong interests in software development, embedded systems, Internet of Things (IoT), and artificial intelligence. Through academic projects and industrial exposure, I have developed problem-solving, teamwork, and technical skills. I am eager to contribute to engineering projects while continuing to grow professionally.</p>
+          <p style="font-size:0.95rem; color:#1f3538; line-height:1.7; background: #f5f0e8; padding: 0.8rem 1.2rem; border-radius: 20px; border: 2px solid #b8b0a0; box-shadow: 0 4px 0 #1a4b4f;">
+            <i class="fas fa-quote-left" style="color:#d4a742; margin-right:6px;"></i>
+            A motivated Computer Engineering graduate with strong interests in software development, embedded systems, Internet of Things (IoT), and artificial intelligence. Through academic projects and industrial exposure, I have developed problem-solving, teamwork, and technical skills. I am eager to contribute to engineering projects while continuing to grow professionally.
+          </p>
         </div>
 
         <!-- education -->
         <div class="content-section animate-item">
           <h3><i class="fas fa-university"></i> Education</h3>
           <div class="education-detail">
-            <span class="uni">Universiti Malaysia Perlis (UniMAP)</span>
+            <span class="uni"><i class="fas fa-graduation-cap" style="color:#d4a742; margin-right:6px;"></i> Universiti Malaysia Perlis (UniMAP)</span>
             <span class="cgpa">CGPA 3.78</span>
           </div>
-          <div style="font-size:0.9rem; color:#1f3538;">Bachelor of Computer Engineering (Hons.) <span style="color:#2b5557; margin-left:12px;">Oct 2021 – Aug 2025</span></div>
+          <div style="font-size:0.85rem; color:#1f3538; font-weight:500;">Bachelor of Computer Engineering (Hons.) <span style="color:#1a4b4f; margin-left:12px; background:#d7cbbc; padding:0 10px; border-radius:20px;">Oct 2021 – Aug 2025</span></div>
         </div>
 
         <!-- experience -->
         <div class="content-section animate-item">
           <h3><i class="fas fa-briefcase"></i> Internship experience</h3>
           <div class="exp-item">
-            <div class="title">Intel Technology Malaysia Sdn. Bhd., Penang <span class="meta"><i class="far fa-calendar-alt"></i> Feb 2025 – Aug 2025</span></div>
+            <div class="title"><i class="fas fa-microchip" style="color:#d4a742;"></i> Intel Technology Malaysia Sdn. Bhd., Penang <span class="meta"><i class="far fa-calendar-alt"></i> Feb 2025 – Aug 2025</span></div>
             <ul>
               <li>Assisted engineers in automated testing activities.</li>
               <li>Supported production data analysis and reporting.</li>
@@ -534,23 +746,26 @@
         <div class="content-section animate-item">
           <h3><i class="fas fa-microchip"></i> Projects</h3>
           <div class="project-item">
-            <div class="title"><i class="fas fa-parking" style="color:#1a5c5e; width:1.4rem;"></i> Smart Parking Monitoring System</div>
+            <div class="title"><i class="fas fa-parking" style="color:#d4a742; width:1.4rem;"></i> Smart Parking Monitoring System <span class="type-badge">IoT</span></div>
             <div class="desc">IoT-based parking availability monitoring using ESP32 and Firebase.</div>
           </div>
           <div class="project-item">
-            <div class="title"><i class="fas fa-chalkboard-teacher" style="color:#1a5c5e; width:1.4rem;"></i> Student Academic Guidance System</div>
+            <div class="title"><i class="fas fa-chalkboard-teacher" style="color:#d4a742; width:1.4rem;"></i> Student Academic Guidance System <span class="type-badge">Web</span></div>
             <div class="desc">Web-based academic recommendation system using PHP and MySQL.</div>
           </div>
           <div class="project-item">
-            <div class="title"><i class="fas fa-home" style="color:#1a5c5e; width:1.4rem;"></i> Smart Home Automation System</div>
+            <div class="title"><i class="fas fa-home" style="color:#d4a742; width:1.4rem;"></i> Smart Home Automation System <span class="type-badge">Embedded</span></div>
             <div class="desc">Remote monitoring and appliance control using ESP8266.</div>
           </div>
         </div>
       </div>
     </div>
-    <!-- subtle footer -->
-    <div style="background:#f3efe8; padding:0.8rem 2rem; border-top:1px solid #d7cbbc; text-align:right; font-size:0.7rem; color:#2f5557; letter-spacing:0.3px;">
-      <i class="fas fa-robot" style="margin-right:6px;"></i> embedded · iot · ai
+
+    <!-- footer with poké theme -->
+    <div class="footer-poke">
+      <span><i class="fas fa-pokeball"></i> Gotta catch 'em all · embedded & IoT</span>
+      <span><i class="fas fa-bolt"></i> Pikachu · I choose you</span>
+      <span><i class="fas fa-code"></i> 2026 · Danish CV</span>
     </div>
   </div>
 </body>
