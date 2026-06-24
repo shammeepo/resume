@@ -12,7 +12,21 @@
       padding: 0;
       box-sizing: border-box;
     }
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+  document.querySelector('.btn-primary').addEventListener('click', function(e) {
+    e.preventDefault();
+    const element = document.querySelector('.container');
+    const opt = {
+      margin:       0.3,
+      filename:     'Shamyrul_Haiqal_CV.pdf',
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2, useCORS: true },
+      jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(element).save();
+  });
+</script>
     body {
       background-color: #fbf7f0;  /* soft cream */
       font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
