@@ -14,9 +14,9 @@
     }
 
     body {
-      background-color: #fbf7f0;  /* soft cream */
+      background-color: #fbf7f0;
       font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
-      color: #1a2e2b; /* deep teal for text */
+      color: #1a2e2b;
       line-height: 1.5;
       padding: 2rem 1.5rem;
     }
@@ -32,7 +32,6 @@
       transition: all 0.2s ease;
     }
 
-    /* ----- ANIMATIONS ----- */
     @keyframes slideUpFade {
       0% { opacity: 0; transform: translateY(40px); }
       100% { opacity: 1; transform: translateY(0); }
@@ -40,7 +39,7 @@
 
     .hero, .profile-pic, .section {
       animation: slideUpFade 0.8s cubic-bezier(0.15, 0.85, 0.35, 1) forwards;
-      opacity: 0; /* start invisible */
+      opacity: 0;
     }
 
     .hero { animation-delay: 0.05s; }
@@ -51,7 +50,6 @@
     .section-4 { animation-delay: 0.55s; }
     .section-5 { animation-delay: 0.65s; }
 
-    /* ----- HERO / PROFILE ----- */
     .hero {
       display: flex;
       flex-wrap: wrap;
@@ -67,7 +65,7 @@
       width: 140px;
       height: 140px;
       border-radius: 50%;
-      background: #d9e7e2; /* soft teal-ish placeholder */
+      background: #d9e7e2;
       border: 4px solid #1e4a44;
       box-shadow: 0 12px 24px -8px rgba(20, 60, 50, 0.2);
       overflow: hidden;
@@ -138,6 +136,7 @@
       transition: all 0.25s ease;
       background: white;
       letter-spacing: 0.3px;
+      cursor: pointer;
     }
 
     .btn-primary {
@@ -161,7 +160,6 @@
       box-shadow: 0 8px 16px -6px #1e4a4430;
     }
 
-    /* ----- SECTION STYLING ----- */
     .section {
       margin-top: 2.8rem;
     }
@@ -184,7 +182,6 @@
       width: 2rem;
     }
 
-    /* ----- CARDS / GRID ----- */
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -263,7 +260,6 @@
       border: 1px solid #b8d2ca;
     }
 
-    /* Skill bars */
     .skill-item {
       margin-bottom: 1rem;
     }
@@ -289,10 +285,9 @@
       height: 100%;
       background: #1e4a44;
       border-radius: 20px;
-      width: 0%; /* will be set inline */
+      width: 0%;
     }
 
-    /* experience timeline */
     .exp-item {
       display: flex;
       flex-wrap: wrap;
@@ -324,7 +319,6 @@
       border-radius: 40px;
     }
 
-    /* list for projects */
     .project-list {
       display: flex;
       flex-direction: column;
@@ -353,7 +347,6 @@
       transform: scale(1.01);
     }
 
-    /* references */
     .ref-card {
       background: #f2f9f6;
       border-radius: 2rem;
@@ -361,7 +354,6 @@
       border-left: 6px solid #1e4a44;
     }
 
-    /* responsive */
     @media (max-width: 700px) {
       .container { padding: 1.5rem; }
       .hero { flex-direction: column; align-items: center; text-align: center; }
@@ -377,11 +369,16 @@
       .exp-item { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
     }
 
-    /* small extras */
     .mt-1 { margin-top: 0.5rem; }
     .flex-wrap { display: flex; flex-wrap: wrap; gap: 0.8rem; }
     .text-muted { color: #3a655d; }
     .fa-fw { width: 1.4rem; }
+
+    /* Loading indicator for download */
+    .btn-primary.loading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -390,7 +387,6 @@
   <!-- HERO + PROFILE PHOTO -->
   <div class="hero">
     <div class="profile-pic">
-      <!-- replace "sham diploma.jpg" with your own image -->
       <img src="sham diploma.jpg" alt="Profile photo of Muhammad Shamyrul Haiqal" width="140" height="140">
     </div>
     <div class="hero-text">
@@ -398,7 +394,7 @@
       <div class="tagline"><i class="fas fa-graduation-cap" style="margin-right: 0.4rem;"></i>Electronic Telecommunication Design · UniMAP</div>
       <p>Passionate Electronic Engineering Technology student with a Diploma in Computer Engineering and current CGPA of 3.80. Skilled in digital system design, Verilog HDL, networking, website development, and technical problem-solving. Seeking opportunities in telecommunications, FPGA design, and embedded systems.</p>
       <div class="btn-group">
-        <a href="#" class="btn btn-primary"><i class="fas fa-file-pdf"></i> Download CV</a>
+        <button class="btn btn-primary" id="downloadBtn" type="button"><i class="fas fa-file-pdf"></i> Download CV</button>
         <a href="mailto:shammaster11@gmail.com" class="btn btn-outline"><i class="fas fa-envelope"></i> shammaster11@gmail.com</a>
       </div>
     </div>
@@ -465,7 +461,7 @@
     </div>
   </div>
 
-  <!-- SECTION: technical skills (with visual bars) -->
+  <!-- SECTION: technical skills -->
   <div class="section section-4">
     <div class="section-title"><i class="fas fa-code"></i> Technical Skills</div>
     <div class="grid-2">
@@ -529,5 +525,43 @@
   </div>
 
 </div> <!-- container -->
+
+<!-- html2pdf library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+  // Wait for page to fully load before attaching click event
+  window.addEventListener('DOMContentLoaded', function() {
+    var downloadBtn = document.getElementById('downloadBtn');
+    
+    if (downloadBtn) {
+      downloadBtn.addEventListener('click', function() {
+        // Show loading state
+        downloadBtn.classList.add('loading');
+        downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
+        
+        var element = document.querySelector('.container');
+        var opt = {
+          margin:       0.3,
+          filename:     'Muhammad_Shamyrul_Haiqal_CV.pdf',
+          image:        { type: 'jpeg', quality: 0.98 },
+          html2canvas:  { scale: 2, useCORS: true, logging: false },
+          jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+        
+        html2pdf().set(opt).from(element).save().then(function() {
+          // Reset button after download
+          downloadBtn.classList.remove('loading');
+          downloadBtn.innerHTML = '<i class="fas fa-file-pdf"></i> Download CV';
+        }).catch(function(error) {
+          console.log('PDF generation failed:', error);
+          downloadBtn.classList.remove('loading');
+          downloadBtn.innerHTML = '<i class="fas fa-file-pdf"></i> Download CV';
+          alert('Download failed. Please try again or use Ctrl+P to save as PDF.');
+        });
+      });
+    }
+  });
+</script>
+
 </body>
 </html>
